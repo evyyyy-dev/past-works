@@ -20,7 +20,7 @@ SEED 5 / 60 ROOMS
 <img src="../images/SEED-5-60.png" width="640" height="360"/>
 
 
-SEED 5 / 120 ROOMS (you can see that the first 60 rooms stay the exact same)
+SEED 5 / 120 ROOMS (first 60 rooms stay the exact same)
 
 <img src="../images/SEED-5-120.png" width="640" height="360"/>
 
