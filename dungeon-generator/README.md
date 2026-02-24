@@ -1,6 +1,6 @@
 # Deterministic Dungeon Generator (DOORS-inspired)
 
-Procedual dungeon generation with deterministic seeds, collision-safe placement.
+Procedual dungeon generation with deterministic seeds and collision-safe placement.
 
 ## Features
 * Seeded generation
