@@ -28,3 +28,5 @@ SEED 5 / 120 ROOMS (you can see that the first 60 rooms stay the exact same)
 SEED 10 / 120 ROOMS (entirely different dungeon)
 
 <img src="../images/SEED-10-120.png" width="640" height="360"/>
+
+More to come later!
