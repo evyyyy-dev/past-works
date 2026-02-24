@@ -9,4 +9,5 @@ Procedual dungeon generation with deterministic seeds, collision-safe placement.
 * Backtracking support (in case it gets completely stuck)
 
 ## Videos & Images
-[![Watch showcase](https://raw.githubusercontent.com/evyyyy-dev/past-works/main/images/DungeonGenerator.png)](https://raw.githubusercontent.com/evyyyy-dev/past-works/main/videos/dungeon-generator.mp4)
+[![Watch showcase](https://img.youtube.com/vi/OdpghMGbseU/0.jpg)](https://www.youtube.com/watch?v=OdpghMGbseU)
+
