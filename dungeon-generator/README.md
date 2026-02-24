@@ -6,7 +6,7 @@ Procedual dungeon generation with deterministic seeds, collision-safe placement.
 * Seeded generation
 * Collision validation
 * Modular room system
-* Backtracking support (in case it gets completely stuck)
+* Backtracking support (in case generation gets completely stuck)
 
 ## Videos & Images
 #### Showcase:
