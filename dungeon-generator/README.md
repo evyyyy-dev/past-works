@@ -30,7 +30,7 @@ ServerScriptServie
 ```
 
 ## Code snippets
-Check (code-snippets.md)[HYPERLINK-TO-THE-FILE] for code examples!
+Check [code-snippets.md](https://raw.githubusercontent.com/evyyyy-dev/past-works/refs/heads/main/dungeon-generator/code-snippets.lua) for code examples!
 
 ## Why I made this
 
