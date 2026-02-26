@@ -1,32 +1,40 @@
 # Deterministic Dungeon Generator (DOORS-inspired)
 
-Procedual dungeon generation with deterministic seeds and collision-safe placement.
+Modular dungeon generation with deterministic seeds and collision-safe placement.
 
 ## Features
 * Seeded generation
 * Collision validation
-* Modular room system
+* Easily expandable, weighted room system
 * Backtracking support (in case generation gets completely stuck)
 
 ## Videos & Images
 #### Showcase:
+--i'll probably rework this video later
 
 [![Watch showcase](https://img.youtube.com/vi/OdpghMGbseU/0.jpg)](https://www.youtube.com/watch?v=OdpghMGbseU)
 
-#### Seeded generation example:
+## Architecture
+```
+ReplicatedStorage
+ ├─ Modules 
+ │   ├─ Core
+ │   │   └─ Generator │ The main module that handles placing, collision checking, backtracking, and more.
+ │   └─ Utils
+ │       └─ Shared    │ One place for variables used by 2 scripts or more.
+ │  ModuleRegistry    │ For easy module access across scripts, so renaming a module requires updating only one variable.
+ └─ StartGeneratingEvent
 
-SEED 5 / 60 ROOMS
+ServerScriptServie
+ └─ RoomGeneration    │ State machine that initializes, generates, and if needed, erases the whole dungeon
+```
 
-<img src="../images/SEED-5-60.png" width="640" height="360"/>
+## Code snippets
+Check (code-snippets.md)[HYPERLINK-TO-THE-FILE] for code examples!
 
+## Why I made this
 
-SEED 5 / 120 ROOMS (first 60 rooms stay the exact same)
+uh... cuz... :3 <--- (this little goober is the reason why I made this)
 
-<img src="../images/SEED-5-120.png" width="640" height="360"/>
-
-
-SEED 10 / 120 ROOMS (entirely different dungeon)
-
-<img src="../images/SEED-10-120.png" width="640" height="360"/>
-
-More to come later!
+## Status
+Complete 
