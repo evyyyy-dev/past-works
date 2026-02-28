@@ -1,6 +1,10 @@
---These are just code snippets from the Generator module! This is not the full script.
---I've added comments above each function that explain how they work.
+-- ======================= --
+-- Generator Module (Snippet)
+-- This snippet demonstrates the placement algorithm and failure recovery logic.
+-- ========================================================================== --
 
+-- Checks whether a room would collide if placed at targetCFrame.
+-- Uses bounding box projection and a shrink multiplier for leniency.
 function Generator:_CheckCollisions(roomModel: Model, targetCFrame: CFrame)
 	local bboxCFrame, bboxSize = roomModel:GetBoundingBox()
 	local bboxOffset = roomModel.PrimaryPart.CFrame:ToObjectSpace(bboxCFrame)
@@ -9,15 +13,16 @@ function Generator:_CheckCollisions(roomModel: Model, targetCFrame: CFrame)
 
 	local parts = workspace:GetPartBoundsInBox(
 		collisionCFrame,
-		bboxSize * COLLISION_SHRINK_MULT --Shrink to make collisions less strict
+		 -- Shrink to make collisions less strict
+		bboxSize * COLLISION_SHRINK_MULT
 	)
 
 	return #parts > 0
 end
 
---[[
-	description gets added later
-]]
+-- Attempts to place a room at the next generation index.
+-- Handles connector alignment, collision validation, and state updates.
+-- @return boolean – true when successfully placed
 function Generator:_TryRoom(room, id)
 	local roomModel: Model = roomsFolder:FindFirstChild(room)
 
@@ -53,6 +58,7 @@ function Generator:_TryRoom(room, id)
 	end
 	
 	local offset = roomModel.PrimaryPart.CFrame:ToObjectSpace(newStartConnector.CFrame)
+	-- Align new room's StartConnector to the previous room's EndConnector
 	local targetCFrame = prevEndConnector.CFrame * CFrame.new(0, 0, -prevEndConnector.Size.Z) * offset:Inverse()
 	local isColliding = self:_CheckCollisions(roomModel, targetCFrame)
 	if isColliding then	return false end
@@ -69,17 +75,14 @@ function Generator:_TryRoom(room, id)
 	return true
 end
 
---[[
-(UNFINISHED, WILL MAKE BETTER LATER)
-This loop picks and tries placing the next room
-If it fails, add it to a dictionary that keeps track of the already tried rooms
-If all possible rooms have beem tried for that index, backtrack by two rooms
-If it has been backtracked MAX_RETRIES times, it terminates the generation
-]]
-
+-- Main deterministic generation loop.
+-- Selects weighted rooms, tracks failed attempts per index,
+-- and performs backtracking when placement fails.
+-- Terminates when MAX_RETRIES is exceeded.
 function Generator:_GenerationLoop()
 	while self.RoomsLeftToGenerate > 0 do
-		task.wait(1)
+		-- Waiting to avoid the game freezing
+		task.wait()
 		local index = self.TotalRooms - self.RoomsLeftToGenerate
 
 		if not self.triedRooms[index] then
@@ -89,7 +92,7 @@ function Generator:_GenerationLoop()
 		local forced = self.forcedRooms[index]
 		if forced and not self:_TryRoom(forced, index) then
 			warn(`[Generator] Forced room "{forced}" at index {index} failed to place!`)
-			return false  --forced rooms can't be skipped, so hard fail
+			return false  -- Forced rooms can't be skipped, so hard fail
 		end
 
 		if forced then continue end
@@ -119,6 +122,7 @@ function Generator:_GenerationLoop()
 			continue
 		end
 
+		--Prevent infinite backtracking loops at the same index
 		self.backtrackCount[index] = (self.backtrackCount[index] or 0) + 1
 
 		if self.backtrackCount[index] >= MAX_RETRIES then
