@@ -30,10 +30,10 @@ ServerScriptServie
 ```
 
 ## Code snippets
-Check [code-snippets.md](https://raw.githubusercontent.com/evyyyy-dev/past-works/refs/heads/main/dungeon-generator/code-snippets.lua) for code examples!
+Check [code-snippets.md](https://github.com/evyyyy-dev/past-works/blob/main/dungeon-generator/code-snippets.lua) for code examples!
 
 ## Why I made this
-
+(yeah i'll add this later)
 uh... cuz... :3 <--- (this little goober is the reason why I made this)
 
 ## Status
