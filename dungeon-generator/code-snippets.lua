@@ -80,8 +80,10 @@ end
 -- and performs backtracking when placement fails.
 -- Terminates when MAX_RETRIES is exceeded.
 function Generator:_GenerationLoop()
+	print("[INFO] Started generating!")
+	local startTime = os.clock()
+
 	while self.RoomsLeftToGenerate > 0 do
-		-- Waiting to avoid the game freezing
 		task.wait()
 		local index = self.TotalRooms - self.RoomsLeftToGenerate
 
@@ -91,8 +93,7 @@ function Generator:_GenerationLoop()
 
 		local forced = self.forcedRooms[index]
 		if forced and not self:_TryRoom(forced, index) then
-			warn(`[Generator] Forced room "{forced}" at index {index} failed to place!`)
-			return false  -- Forced rooms can't be skipped, so hard fail
+			self:_Backtrack(BACKTRACK_AMOUNT, index)
 		end
 
 		if forced then continue end
@@ -121,34 +122,20 @@ function Generator:_GenerationLoop()
 		if triedCount < totalCount then
 			continue
 		end
-
+		
 		--Prevent infinite backtracking loops at the same index
 		self.backtrackCount[index] = (self.backtrackCount[index] or 0) + 1
 
 		if self.backtrackCount[index] >= MAX_RETRIES then
 			warn(`[Generator] Max retries reached at index {index}, generation has failed!`)
-			return false
+			return
 		end
 
-		warn(`[Generator] Backtracking {BACKTRACK_AMOUNT} steps at index {index}...`)
-
-		for i = 1, BACKTRACK_AMOUNT do
-			self.triedRooms[index - i + 1] = nil
-		end
-
-		local backtrackedRoom = self.placedRooms[#self.placedRooms - BACKTRACK_AMOUNT + 1]
-		local backtrackedIndex = index - BACKTRACK_AMOUNT + 1
-		if backtrackedRoom then
-			self.triedRooms[backtrackedIndex] = self.triedRooms[backtrackedIndex] or {}
-
-			--Strip the prefix (like the 001 in 001_HallwayRoom)
-			local baseName = backtrackedRoom.Name:match("^%d+_(.+)$") or backtrackedRoom.Name
-			self.triedRooms[backtrackedIndex][baseName] = true
-		end
-
-		self:_Backtrack(BACKTRACK_AMOUNT)
+		self:_Backtrack(BACKTRACK_AMOUNT, index)
 	end
-
-	return true
+	
+	print(string.format("[INFO] Finished generating in %.5fs!",
+		os.clock() - startTime
+	))
 end
 
