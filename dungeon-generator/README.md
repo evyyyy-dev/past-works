@@ -37,4 +37,4 @@ Check [code-snippets.md](https://github.com/evyyyy-dev/past-works/blob/main/dung
 uh... cuz... :3 <--- (this little goober is the reason why I made this)
 
 ## Status
-Complete 
+**Complete** – further improvements may be made
