@@ -28,17 +28,38 @@
 ## Architecture
 
 ```
+Workspace
+ ├─ LoadedRooms                     │ The folder where all loaded rooms are inside of.
+ └─ GeneratorModel
+     └─ ControlPanel
+        └─  SurfaceGui        
+             ├─ Frame   
+             │   └─ InputContainer
+             │       │  RoomInput   │ Number input for the amount of rooms to generate.
+             │       └─ SeedInput   │ Number input for the seed, if nothing is specified it uses a random seed.
+             └─ StartButton
+
 ReplicatedStorage
  ├─ Modules
  │   ├─ Core
- │   │   └─ Generator     │ The main module that handles placing, collision checking, backtracking, and more.
+ │   │   └─ Generator               │ The main module that handles placing, collision checking, backtracking, and more.
  │   └─ Utils
- │       └─ Shared        │ Shared variables used across 2+ scripts.
- │  ModuleRegistry        │ Centralized module access, so renaming a module requires updating only one variable.
+ │       └─ Shared                  │ Shared variables used across 2+ scripts.
+ │  ModuleRegistry                  │ Centralized module access, so renaming a module requires updating only one variable.
+ ├─ Rooms
+ │   └─ ExampleRoom
+ │       ├─  Connectors             │ A folder containing both  └─start and end connectors, used for placement
+ │       │  │  StartConnector       │ The StartConnector pivots to the previous room's EndConnector.
+ │       │  └─ EndConnector
+ │       │  Geometry
+ │       │  │  Walls
+ │       │  └─ Floor
+ │       │  Props
+ │       └─ MetadataValues          │ Metadata of the room containing it's weight (chance to get picked) and type.
  └─ StartGeneratingEvent
 
 ServerScriptServie
- └─ RoomGeneration        │ State machine that initializes, generates, and if needed, erases the whole dungeon.
+ └─ RoomGeneration                  │ State machine that initializes, generates, and if needed, erases the whole dungeon.
 ```
 
 ---
