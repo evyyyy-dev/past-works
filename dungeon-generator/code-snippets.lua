@@ -1,7 +1,7 @@
 -- ======================= --
 -- Generator Module (Snippet)
--- This snippet demonstrates the placement algorithm and failure recovery logic.
--- ========================================================================== --
+-- This snippet demonstrates the collision validation, room placement, and the main generation loop.
+-- ============================================================================================== --
 
 -- Checks whether a room would collide if placed at targetCFrame.
 -- Uses bounding box projection and a shrink multiplier for leniency.
