@@ -32,12 +32,12 @@ Workspace
  ├─ LoadedRooms                     │ The folder where all loaded rooms are inside of.
  └─ GeneratorModel
      └─ ControlPanel
-        └─  SurfaceGui        
-             ├─ Frame   
-             │   └─ InputContainer
-             │       │  RoomInput   │ Number input for the amount of rooms to generate.
-             │       └─ SeedInput   │ Number input for the seed, if nothing is specified it uses a random seed.
-             └─ StartButton
+         └─ SurfaceGui
+            ├─ Frame   
+            │   └─ InputContainer
+            │       ├─ RoomInput   │ Number input for the amount of rooms to generate.
+            │       └─ SeedInput   │ Number input for the seed, if nothing is specified it uses a random seed.
+            └─ StartButton
 
 ReplicatedStorage
  ├─ Modules
@@ -45,17 +45,17 @@ ReplicatedStorage
  │   │   └─ Generator               │ The main module that handles placing, collision checking, backtracking, and more.
  │   └─ Utils
  │       └─ Shared                  │ Shared variables used across 2+ scripts.
- │  ModuleRegistry                  │ Centralized module access, so renaming a module requires updating only one variable.
  ├─ Rooms
  │   └─ ExampleRoom
  │       ├─  Connectors             │ A folder containing both  └─start and end connectors, used for placement
- │       │  │  StartConnector       │ The StartConnector pivots to the previous room's EndConnector.
+ │       │  ├─ StartConnector       │ The StartConnector pivots to the previous room's EndConnector.
  │       │  └─ EndConnector
- │       │  Geometry
- │       │  │  Walls
+ │       ├─ Geometry
+ │       │  ├─ Walls
  │       │  └─ Floor
- │       │  Props
+ │       ├─ Props
  │       └─ MetadataValues          │ Metadata of the room containing it's weight (chance to get picked) and type.
+ ├─ ModuleRegistry                  │ Centralized module access, so renaming a module requires updating only one variable.
  └─ StartGeneratingEvent
 
 ServerScriptServie
