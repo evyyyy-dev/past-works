@@ -66,7 +66,7 @@ ServerScriptServie
 
 ## Code snippets
 
-Check out [code-snippets.md](https://github.com/evyyyy-dev/past-works/blob/main/dungeon-generator/code-snippets.lua) for code examples.
+Check out [code-snippets.lua](https://github.com/evyyyy-dev/past-works/blob/main/dungeon-generator/code-snippets.lua) for code examples.
 
 ---
 
